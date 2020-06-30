@@ -24,12 +24,10 @@ int	main(int argc, char ** argv)
 {
 	int		fd1;
 	int		fd2;
-	int		cat1;
-	int		cat2;
+	int		result1;
+	int		result2;
 	char	*line1;
 	char	*line2;
-	pid_t	child;
-	char	n = '\n';
 
 	if (argc < 2)
 	{
@@ -38,15 +36,14 @@ int	main(int argc, char ** argv)
 	}
 	fd1 = open(argv[1], O_RDONLY);
 	fd2 = open(argv[2], O_RDONLY);
-	while ((cat1 = get_next_line(fd1, &line1) > 0)
-			|| ((cat2 = get_next_line(fd2, &line2)) > 0))
+	while ((result1 = get_next_line(fd1, &line1) > 0)
+			|| ((result2 = get_next_line(fd2, &line2)) > 0))
 	{
 		printf("%d:%s\n", fd1, line1);
-		//printf("%d:%s\n", fd2, line2);
+		printf("%d:%s\n", fd2, line2);
 		free(line1);
+		free(line2);
 	}
-		/* free(line); */
-	/* printf("gnl:%d\n",cat); */
 	return (0);
 }
 
